@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Page d'Accueil - Pokémon, F1 & Musique
+{% endblock %}
+
+{% block content %}
+	<section class="pokemons">
+		<h2>Pokémon</h2>
+		<ul>
+			{% for pokemon in pokemons %}
+				<li>{{ pokemon }}</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section class="f1">
+		<h2>Formule 1</h2>
+		<ul>
+			{% for team in f1_teams %}
+				<li>{{ team }}</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section class="music">
+		<h2>Genres Musicaux</h2>
+		<ul>
+			{% for genre in music_genres %}
+				<li>{{ genre }}</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
