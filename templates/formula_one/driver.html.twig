@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}
+	{{ driver.firstName }}
+	{{ driver.lastName }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ driver.firstName }}
+		{{ driver.lastName }}</h1>
+
+	<ul>
+		<li>
+			<strong>Nationalité :</strong>
+			{{ driver.nationality }}</li>
+		<li>
+			<strong>Date de naissance :</strong>
+			{{ driver.birthdate ? driver.birthdate|date('d/m/Y') : 'N/A' }}</li>
+		<li>
+			<strong>Équipe :</strong>
+			{% if driver.team %}
+				<a href="{{ path('team_show', {id: driver.team.id}) }}">{{ driver.team.name }}</a>
+			{% else %}
+				Aucune
+			{% endif %}
+		</li>
+	</ul>
+{% endblock %}

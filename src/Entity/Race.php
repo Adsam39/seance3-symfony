@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RaceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RaceRepository::class)]
@@ -24,6 +26,9 @@ class Race
 
     #[ORM\ManyToOne(targetEntity: Season::class)]
     private $season;
+
+    #[ORM\OneToMany(mappedBy: 'race', targetEntity: Result::class)]
+    private Collection $results;
 
     public function getId(): ?int
     {
@@ -74,6 +79,38 @@ class Race
     public function setSeason(?Season $season): self
     {
         $this->season = $season;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->results = new ArrayCollection();
+    }
+
+    public function getResults(): Collection
+    {
+        return $this->results;
+    }
+
+    public function addResult(Result $result): self
+    {
+        if (!$this->results->contains($result)) {
+            $this->results->add($result);
+            $result->setRace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResult(Result $result): self
+    {
+        if ($this->results->removeElement($result)) {
+            // set the owning side to null (unless already changed)
+            if ($result->getRace() === $this) {
+                $result->setRace(null);
+            }
+        }
 
         return $this;
     }
