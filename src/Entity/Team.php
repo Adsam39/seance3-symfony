@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TeamRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
@@ -21,6 +23,9 @@ class Team
 
     #[ORM\Column(nullable: true)]
     private $foundedYear;
+
+    #[ORM\OneToMany(mappedBy: 'team', targetEntity: Driver::class)]
+    private Collection $drivers;
 
     public function getId(): ?int
     {
@@ -66,5 +71,37 @@ class Team
     public function __toString(): string
     {
         return $this->name;
+    }
+
+    public function __construct()
+    {
+        $this->drivers = new ArrayCollection();
+    }
+
+    public function getDrivers(): Collection
+    {
+        return $this->drivers;
+    }
+
+    public function addDriver(Driver $driver): self
+    {
+        if (!$this->drivers->contains($driver)) {
+            $this->drivers[] = $driver;
+            $driver->setTeam($this); // mettre à jour le côté inverse
+        }
+
+        return $this;
+    }
+
+    public function removeDriver(Driver $driver): self
+    {
+        if ($this->drivers->removeElement($driver)) {
+            // unset the owning side
+            if ($driver->getTeam() === $this) {
+                $driver->setTeam(null);
+            }
+        }
+
+        return $this;
     }
 }

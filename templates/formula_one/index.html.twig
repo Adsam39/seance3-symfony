@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Hello FormulaOneController!
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1>Formula One - Saison
+			{{ races[0].season.year }}</h1>
+
+		<h2>Courses</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Course</th>
+					<th>Circuit</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for race in races %}
+					<tr>
+						<td>{{ race.id }}</td>
+						<td>
+							<a href="{{ path('race_show', {id: race.id})}}" target="_blank">{{ race.circuit.name }}</a>
+						</td>
+						<td>{{ race.raceDate|date('d/m/Y') }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<h2>Pilotes</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Pilote</th>
+					<th>Équipe</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for driver in drivers %}
+					<tr>
+						<td>
+							<a href="{{ path('driver_show', {id: driver.id})}}" target="_blank">{{ driver }}</a>
+						</td>
+						<td>{{ driver.team.name }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+		<h2>Équipes</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Équipe</th>
+					<th>Pilote(s)</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for team in teams %}
+					<tr>
+						<td>
+							<a href="{{ path('team_show', {id: team.id})}}" target="_blank">{{ team.name }}</a>
+						</td>
+
+						<td>
+							{% for driver in team.drivers %}
+								{{ driver }}
+								{% if not loop.last %},
+								{% endif %}
+							{% endfor %}
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

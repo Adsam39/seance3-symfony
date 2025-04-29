@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}
+	{{ team.name }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ team.name }}</h1>
+
+	<ul>
+		<li>
+			<strong>Pays :</strong>
+			{{ team.country ?: 'N/A' }}</li>
+		<li>
+			<strong>Année de création :</strong>
+			{{ team.foundedYear ?: 'N/A' }}</li>
+	</ul>
+
+	<h2>Pilotes</h2>
+	{% if team.drivers is not empty %}
+		<ul>
+			{% for driver in team.drivers %}
+				<li>
+					<a href="{{ path('driver_show', {id: driver.id}) }}">
+						{{ driver.firstName }}
+						{{ driver.lastName }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<p>Aucun pilote associé.</p>
+	{% endif %}
+{% endblock %}

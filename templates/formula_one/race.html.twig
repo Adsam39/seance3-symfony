@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}
+	{{ race.name }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ race.name }}</h1>
+	<p>Date :
+		{{ race.raceDate|date('d/m/Y') }}</p>
+	<p>Circuit :
+		{{ race.circuit }}</p>
+
+	<h2>Résultats</h2>
+	<ul>
+		{% for result in race.results %}
+			<li>{{ result.driver }}
+				- Position :
+				{{ result.position }}</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
