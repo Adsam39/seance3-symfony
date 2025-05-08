@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html.twig' %}
+
+
+{% block title %}Détails de l'artiste -
+	{{ artist.name }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ artist.name }}</h1>
+	<p>
+		<strong>Origine :</strong>
+		{{ artist.country ? artist.country : 'Non spécifiée' }}</p>
+
+	<h2>Albums de
+		{{ artist.name }}</h2>
+	<ul>
+		{% for album in artist.albums %}
+			<li>
+				<a href="{{ path('app_album_show', {'id': album.id}) }}">{{ album.title }}</a>
+			</li>
+		{% else %}
+			<li>Aucun album disponible pour cet artiste.</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+
