@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html.twig' %}
+
+
+{% block title %}Détails de l'album -
+	{{ album.title }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ album.title }}</h1>
+	<p>
+		<strong>Artiste :</strong>
+		{{ album.artist.name }}</p>
+	<p>
+		<strong>Date de sortie :</strong>
+		{{ album.releaseDate ? album.releaseDate|date('d/m/Y') : 'Non spécifiée' }}</p>
+
+	<h2>Chansons de
+		{{ album.title }}</h2>
+	<ul>
+		{% for song in album.songs %}
+			<li>{{ song.title }}
+				- Genre :
+				{{ song.genre.name }}
+				- Durée :
+				{{ song.duration }}
+				sec</li>
+		{% else %}
+			<li>Aucune chanson disponible pour cet album.</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
+

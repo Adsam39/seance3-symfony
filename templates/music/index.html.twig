@@ -1,0 +1,60 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Page Musique
+{% endblock %}
+
+{% block content %}
+	<h1>Bienvenue sur la page des musiques</h1>
+
+	<section>
+		<h2>Genres</h2>
+		<ul>
+			{% for genre in genres %}
+				<li>{{ genre.name }}</li>
+			{% else %}
+				<li>Aucun genre disponible.</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section>
+		<h2>Artistes</h2>
+		<ul>
+			{% for artist in artists %}
+				<li>
+					<a href="{{ path('app_artist_show', {'id': artist.id}) }}">{{ artist.name }}</a>
+				</li>
+			{% else %}
+				<li>Aucun artiste disponible.</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section>
+		<h2>Albums</h2>
+		<ul>
+			{% for album in albums %}
+				<li>
+					<a href="{{ path('app_album_show', {'id': album.id}) }}">{{ album.title }}</a>
+				</li>
+			{% else %}
+				<li>Aucun album disponible.</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section>
+		<h2>Chansons</h2>
+		<ul>
+			{% for song in songs %}
+				<li>{{ song.title }}
+					- Durée :
+					{{ song.duration }}
+					sec</li>
+			{% else %}
+				<li>Aucune chanson disponible.</li>
+			{% endfor %}
+		</ul>
+	</section>
+{% endblock %}
+
