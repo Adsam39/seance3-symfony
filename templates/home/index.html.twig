@@ -5,7 +5,9 @@
 
 {% block content %}
 	<section class="pokemons">
-		<h2>Pokémon</h2>
+		<h2>
+			<a href="{{ path('app_pokemon') }}" style="text-decoration: none;">Pokémon</a>
+		</h2>
 		<ul>
 			{% for pokemon in pokemons %}
 				<li>{{ pokemon }}</li>
@@ -14,7 +16,9 @@
 	</section>
 
 	<section class="f1">
-		<h2>Formule 1</h2>
+		<h2>
+			<a href="{{ path('app_formula_one') }}" style="text-decoration: none;">Formule 1</a>
+		</h2>
 		<ul>
 			{% for team in f1_teams %}
 				<li>{{ team }}</li>
@@ -23,7 +27,9 @@
 	</section>
 
 	<section class="music">
-		<h2>Genres Musicaux</h2>
+		<h2>
+			<a href="#" style="text-decoration: none;">Genres Musicaux</a>
+		</h2>
 		<ul>
 			{% for genre in music_genres %}
 				<li>{{ genre }}</li>
