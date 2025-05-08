@@ -10,23 +10,11 @@
 		<link rel="stylesheet" href="{{ asset('css/style.css') }}">
 	</head>
 	<body>
-		<header>
-			<nav>
-				<ul>
-					<li><ahref="{{path('app_home')}}">Accueil</a></li>
-					<li><a href="#">Pokémon</a></li>
-					<li><a href="#">F1</a></li>
-					<li><a href="#">Musique</a></li>
-				</ul>
-			</nav>
-		</header>
 
+		{% include 'partials/header.html.twig' %}
 		<main>
 			{% block content %}{% endblock %}
 		</main>
-
-		<footer>
-			<p>&copy; 2025 Pokémon, F1 & Musique</p>
-		</footer>
+		{% include 'partials/footer.html.twig' %}
 	</body>
 </html>

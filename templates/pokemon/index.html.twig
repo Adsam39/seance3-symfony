@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Pokémon
+{% endblock %}
+
+{% block content %}
+	<h1>Liste des Pokémon</h1>
+
+	<table style="border-collapse: collapse; width: 100%;">
+		<thead>
+			<tr>
+				<th style="border: 1px solid #ddd; padding: 8px;">#</th>
+				<th style="border: 1px solid #ddd; padding: 8px;">Nom</th>
+				<th style="border: 1px solid #ddd; padding: 8px;">Type</th>
+				<th style="border: 1px solid #ddd; padding: 8px;">Talent</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for pokemon in pokemons %}
+				<tr>
+					<td style="border: 1px solid #ddd; padding: 8px;">{{ pokemon.numeroPokedex }}</td>
+					<td style="border: 1px solid #ddd; padding: 8px;">
+						<a href="{{ path('pokemon_show', {'id': pokemon.id}) }}">{{ pokemon.nom }}</a>
+					</td>
+					<td style="border: 1px solid #ddd; padding: 8px;">{{ pokemon.type1.nom }}</td>
+					<td style="border: 1px solid #ddd; padding: 8px;">
+						{{ pokemon.talent ? pokemon.talent.nom : '—' }}
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="4" style="border: 1px solid #ddd; padding: 8px; text-align: center;">
+						Aucun Pokémon trouvé.
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
